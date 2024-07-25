@@ -98,6 +98,14 @@ Then ask the person if the pain is a daily thing.""",
     }
 
 
+@app.post("/update-quiz")
+async def edit_quiz(quiz: Quiz) -> None:
+    assert not quiz.version
+    current_quiz = app.setup_tables.quiz.where(quiz_id=quiz.quizId).limit(1)
+    quiz.version = current_quiz.version + 1
+    app.setup_tables.quiz.insert(quiz.model_dump())
+
+
 @app.post("/quiz-entry")
 async def put_quiz_entry(quiz: NewQuizEntry):
     return "123"
