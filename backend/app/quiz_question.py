@@ -38,6 +38,7 @@ class GenerativeMultipleChoice(
 
 class Quiz(BaseModel):
     quizId: str
+    version: Union[int, None] = None
     title: str
     description: str
     controls: list[
@@ -68,6 +69,7 @@ class QuizEntry(BaseModel):
 class QuizParticipant(BaseModel):
     userId: str
     quizId: str
+    quizVersion: str
     quizEntryId: str
     email: str
     firstName: str
